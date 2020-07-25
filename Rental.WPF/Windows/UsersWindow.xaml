@@ -1,0 +1,225 @@
+﻿<Window
+    x:Class="Rental.WPF.Windows.UsersWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:c="clr-namespace:Rental.WPF.Helpers"
+    xmlns:local="clr-namespace:Rental.WPF.Windows"
+    mc:Ignorable="d"
+    Title="Lista użytkowników"
+    Height="450"
+    Width="800"
+    Loaded="Window_Loaded"
+    WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <c:SelectedListCountToBool
+            x:Key="SelectedListCountToBool"></c:SelectedListCountToBool>
+        <CollectionViewSource
+            Source="{Binding}"
+            x:Key="UserListView" />
+    </Window.Resources>
+    <DockPanel>
+        <Menu
+            DockPanel.Dock="top"
+            Padding="5">
+            <MenuItem
+                Header="Użytkownicy">
+                <MenuItem
+                    Header="Dodaj" />
+                <MenuItem
+                    Header="Edytuj" />
+                <MenuItem
+                    Header="Usuń" />
+                <Separator />
+                <MenuItem
+                    Header="Zamknij" />
+            </MenuItem>
+            <MenuItem
+                Header="O programie..." />
+        </Menu>
+        <StatusBar
+            DockPanel.Dock="Bottom"
+            Height="25">
+            <StatusBarItem
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center">
+                <TextBlock
+                    Padding="0,0,10,0">
+                    <Run
+                        Text="Liczba użytkowników : " />
+                    <Run
+                        Text="{Binding ElementName=UserList, Path=Items.Count, Mode=OneWay}" />
+                </TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+
+        <Grid
+            x:Name="MainGrid"
+            Margin="10,0,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="50" />
+                <RowDefinition
+                    Height="30" />
+                <RowDefinition
+                    Height="*" />
+                <RowDefinition
+                    Height="50" />
+            </Grid.RowDefinitions>
+
+            <RadioButton
+                x:Name="AllBtn"
+                Content="Wszyscy"
+                HorizontalAlignment="Left"
+                Margin="0"
+                VerticalAlignment="Center"
+                IsChecked="True"
+                Grid.Column="0"
+                Grid.Row="0"
+                Checked="AllBtn_Checked" />
+            <RadioButton
+                x:Name="CustomersBtn"
+                Content="Klienci"
+                HorizontalAlignment="Center"
+                Margin="0"
+                Grid.Column="1"
+                Grid.Row="0"
+                VerticalAlignment="Center"
+                Checked="CustomerBtn_Checked" />
+            <RadioButton
+                x:Name="AppUsersBtn"
+                Content="Pracownicy"
+                HorizontalAlignment="Center"
+                Margin="0"
+                VerticalAlignment="Center"
+                Grid.Column="2"
+                Grid.Row="0"
+                Checked="AppUserBtn_Checked" />
+            <StackPanel
+                Grid.Column="4"
+                Grid.ColumnSpan="2"
+                Grid.Row="0">
+                <Label
+                    HorizontalAlignment="Right">Wyszukaj po nazwisku</Label>
+                <TextBox
+                    x:Name="SearchTxt"
+                    Width="200"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    TextChanged="UserFilter_OnTextChanged" />
+            </StackPanel>
+            <Button
+                x:Name="NewBtn"
+                Content="Dodaj"
+                HorizontalAlignment="Right"
+                Margin="0"
+                VerticalAlignment="Center"
+                Width="100"
+                Grid.Column="2"
+                Grid.Row="3"
+                Padding="3"
+                Click="NewBtn_Click"
+                IsDefault="true" />
+            <Button
+                x:Name="StatBtn"
+                Content="Statystyki"
+                HorizontalAlignment="Right"
+                Margin="0"
+                VerticalAlignment="Center"
+                Width="100"
+                Grid.Column="3"
+                Grid.Row="3"
+                Padding="3"
+                Click="StatBtn_Click"
+                IsEnabled="{Binding ElementName=UserList, Path=SelectedItems.Count, Converter={StaticResource SelectedListCountToBool}}" />
+            <Button
+                x:Name="EditBtn"
+                Content="Edytuj"
+                HorizontalAlignment="Right"
+                Margin="0"
+                VerticalAlignment="Center"
+                Width="100"
+                Grid.Column="4"
+                Grid.Row="3"
+                Padding="3"
+                Click="EditBtn_Click"
+                IsEnabled="{Binding ElementName=UserList, Path=SelectedItems.Count, Converter={StaticResource SelectedListCountToBool}}" />
+            <Button
+                x:Name="CloseBtn"
+                Content="Zamknij"
+                HorizontalAlignment="Right"
+                Margin="0"
+                VerticalAlignment="Center"
+                Width="100"
+                Grid.Column="5"
+                Grid.Row="3"
+                Padding="3"
+                Click="CloseBtn_Click" />
+
+            <ListView
+                x:Name="UserList"
+                Margin="0"
+                VerticalAlignment="Top"
+                SelectionMode="Single"
+                Grid.Column="0"
+                Grid.Row="1"
+                Grid.ColumnSpan="6"
+                Grid.RowSpan="2"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                MouseDoubleClick="EditBtn_Click"
+                ItemsSource="{Binding Source={StaticResource UserListView}}">
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem
+                            Header="Edytuj"
+                            Click="EditBtn_Click" />
+                        <MenuItem
+                            Header="Usuń"
+                            Click="RemoveCompany" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn
+                            Width="auto"
+                            DisplayMemberBinding="{Binding FirstName}">
+                            <GridViewColumnHeader
+                                x:Name="FirstName"
+                                Click="Sorting_Click">Imię
+                            </GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn
+                            Width="auto"
+                            DisplayMemberBinding="{Binding LastName}">
+                            <GridViewColumnHeader
+                                x:Name="LastName"
+                                Click="Sorting_Click">Nazwisko</GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn
+                            Header="Firma"
+                            Width="auto"
+                            DisplayMemberBinding="{Binding Company.CompanyName}" />
+                        <GridViewColumn
+                            Header="Telefon"
+                            Width="auto"
+                            DisplayMemberBinding="{Binding Phone}" />
+                        <GridViewColumn
+                            Header="Email"
+                            Width="auto"
+                            DisplayMemberBinding="{Binding Email}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </DockPanel>
+</Window>

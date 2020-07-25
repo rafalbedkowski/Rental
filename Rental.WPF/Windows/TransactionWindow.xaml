@@ -1,0 +1,167 @@
+﻿<Window
+    x:Class="Rental.WPF.Windows.TransactionWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Rental.WPF.Windows"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:models="clr-namespace:Rental.DAL.Models;assembly=Rental.DAL"
+    mc:Ignorable="d"
+    Title="Nowa transakcja"
+    Height="450"
+    Width="800"
+    Closing="ClosingWindow"
+    Loaded="Window_Loaded"
+    WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <models:Transaction></models:Transaction>
+    </Window.DataContext>
+    <DockPanel>
+        <Menu
+            DockPanel.Dock="top"
+            Padding="5">
+            <MenuItem
+                Header="Operacja">
+                <MenuItem
+                    Header="Zamknij"
+                    Click="Close_Click" />
+            </MenuItem>
+            <MenuItem
+                Header="O programie..."
+                Click="About" />
+        </Menu>
+        <StatusBar
+            Height="25"
+            DockPanel.Dock="Bottom">
+            <StatusBarItem
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center">
+                <TextBlock
+                    Padding="0,0,10,0">
+                    <Run
+                        Text="Liczba narzędzin : " />
+                    <Run
+                        Text="{Binding ElementName=ToolsListView, Path=Items.Count, Mode=OneWay}" />
+                </TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+        <DockPanel
+            Margin="10,10,10,10">
+            <Grid
+                DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel
+                    Grid.Column="0"
+                    Margin="0,0,10,20"
+                    Width="150"
+                    HorizontalAlignment="Left">
+                    <Label>Data wypożyczenia</Label>
+                    <DatePicker
+                        x:Name="TransactionDate"
+                        SelectedDate="{Binding TransactionDate, StringFormat=dd.MM.yyy HH:mm}"></DatePicker>
+                </StackPanel>
+                <Button
+                    x:Name="AddBtn"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Padding="10,5,10,5"
+                    Margin="0,10,0,10"
+                    Click="AddBtn_Click"
+                    Content="Dodaj urządzenia" />
+            </Grid>
+            <Grid
+                DockPanel.Dock="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel
+                    Grid.Column="0"
+                    Margin="0,0,10,0">
+                    <Label>Klient</Label>
+                    <ComboBox
+                        x:Name="SelectListCustomer"
+                        IsEditable="True"
+                        DisplayMemberPath="FullName"
+                        SelectedItem="{Binding Customer,Mode=TwoWay}"
+                        SelectedValue="{Binding Customer.UserId, Mode=OneWay}"
+                        SelectedValuePath="UserId"
+                        DropDownOpened="ComboBox_OnDropDownOpened" />
+                    <StackPanel
+                        Orientation="Horizontal"
+                        HorizontalAlignment="left"
+                        Margin="0,10,0,0">
+                        <Button
+                            x:Name="PrintBtn"
+                            Margin="0,0,0,0"
+                            Padding="20,5,20,5"
+                            IsEnabled="{Binding ElementName=ToolsListView, Path=Items.Count }"
+                            Click="PrintBtn_Click">Drukuj</Button>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="10,0,0,0">
+                    <Label>Obsługa</Label>
+                    <ComboBox
+                        x:Name="SelectListUser"
+                        IsEditable="True"
+                        DisplayMemberPath="FullName"
+                        SelectedItem="{Binding AppUser,Mode=TwoWay}"
+                        SelectedValue="{Binding AppUser.UserId, Mode=OneWay}"
+                        SelectedValuePath="UserId"
+                        DropDownOpened="ComboBox_OnDropDownOpened" />
+                    <StackPanel
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0,10,0,0">
+                        <Button
+                            x:Name="CancelBtn"
+                            Margin="0,0,5,0"
+                            Padding="20,5,20,5"
+                            Click="CancelBtn_Click">Anuluj</Button>
+                        <Button
+                            x:Name="SaveBtn"
+                            Margin="5,0,0,0"
+                            Padding="20,5,20,5"
+                            IsEnabled="{Binding ElementName=ToolsListView, Path=Items.Count }"
+                            Click="SaveBtn_Click">Zapisz</Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <ListView
+                x:Name="ToolsListView">
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem
+                            Header="Usuń"
+                            Click="RemoveTool" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn
+                            Header="Nazwa"
+                            DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn
+                            Header="Producent"
+                            DisplayMemberBinding="{Binding Producer.CompanyName}" />
+                        <GridViewColumn
+                            Header="SN"
+                            DisplayMemberBinding="{Binding Sn}" />
+                        <GridViewColumn
+                            Header="Cena wypożyczenia"
+                            DisplayMemberBinding="{Binding RentalPrice}" />
+                        <GridViewColumn
+                            Header="Opis"
+                            DisplayMemberBinding="{Binding Description}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+    </DockPanel>
+</Window>

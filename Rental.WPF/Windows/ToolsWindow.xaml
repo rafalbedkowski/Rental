@@ -1,0 +1,225 @@
+﻿<Window
+    x:Class="Rental.WPF.Windows.ToolsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Rental.WPF.Windows"
+    xmlns:helpers="clr-namespace:Rental.WPF.Helpers"
+    mc:Ignorable="d"
+    Title="Lista narzędzi"
+    Height="450"
+    Width="800"
+    Loaded="Window_Loaded"
+    WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <helpers:SelectedListCountToBool
+            x:Key="SelectedListCountToBool"></helpers:SelectedListCountToBool>
+        <CollectionViewSource
+            Source="{Binding}"
+            x:Key="ToolsListView" />
+    </Window.Resources>
+    <DockPanel>
+        <Menu
+            DockPanel.Dock="top"
+            Padding="5">
+            <MenuItem
+                Header="Urządzenia">
+                <MenuItem
+                    Header="Dodaj" />
+                <MenuItem
+                    Header="Edytuj" />
+                <MenuItem
+                    Header="Usuń zaznaczone" />
+                <Separator />
+                <MenuItem
+                    Header="Zamknij" />
+            </MenuItem>
+            <MenuItem
+                Header="O programie..." />
+        </Menu>
+        <StatusBar
+            DockPanel.Dock="Bottom"
+            Height="25">
+            <StatusBarItem
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center">
+                <TextBlock
+                    Padding="0,0,10,0">
+                <Run
+                        Text="Liczba narzędzin : " />
+                <Run
+                        Text="{Binding ElementName=ToolsListView, Path=Items.Count, Mode=OneWay}" />
+                </TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+
+        <Grid
+            x:Name="ToolGrid"
+            Margin="10,0,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="50" />
+                <RowDefinition
+                    Height="30" />
+                <RowDefinition
+                    Height="*" />
+                <RowDefinition
+                    Height="50" />
+            </Grid.RowDefinitions>
+
+            <RadioButton
+                x:Name="AllBtn"
+                Content="Wszystkie"
+                HorizontalAlignment="Left"
+                Margin="0"
+                VerticalAlignment="Center"
+                IsChecked="True"
+                Grid.Column="0"
+                Grid.Row="0"
+                Checked="AllBtn_Checked" />
+            <RadioButton
+                x:Name="RentBtn"
+                Content="Wypożyczone"
+                HorizontalAlignment="Center"
+                Margin="0"
+                Grid.Column="1"
+                Grid.Row="0"
+                VerticalAlignment="Center"
+                Checked="RentBtn_Checked" />
+            <RadioButton
+                x:Name="StorageBtn"
+                Content="Na magazynie"
+                HorizontalAlignment="Center"
+                Margin="0"
+                VerticalAlignment="Center"
+                Grid.Column="2"
+                Grid.Row="0"
+                Checked="StorageBtn_Checked" />
+            <RadioButton
+                x:Name="DestroyedBnt"
+                Content="Uszkodzone"
+                HorizontalAlignment="Center"
+                Margin="0"
+                VerticalAlignment="Center"
+                Grid.Column="3"
+                Grid.Row="0"
+                Checked="DestroyedBtn_Checked" />
+            <RadioButton
+                x:Name="LostBtn"
+                Content="Zagubione"
+                HorizontalAlignment="Center"
+                Margin="0"
+                VerticalAlignment="Center"
+                Grid.Column="4"
+                Grid.Row="0"
+                Checked="LostBtn_Checked" />
+            <StackPanel
+                Grid.Column="5"
+                Grid.Row="0">
+                <Label
+                    HorizontalAlignment="Right">Wyszukaj po nazwie</Label>
+                <TextBox
+                    x:Name="SearchTxt"
+                    Grid.Column="5"
+                    Grid.Row="0"
+                    VerticalAlignment="Center"
+                    TextChanged="ToolsFilter_OnTextChanged" />
+            </StackPanel>
+            <Button
+                Content="Dodaj"
+                HorizontalAlignment="Right"
+                Margin="0"
+                VerticalAlignment="Center"
+                Width="100"
+                Grid.Column="2"
+                Grid.Row="3"
+                Padding="3"
+                Click="NewBtn_Click" />
+            <Button
+                Content="Statystyki"
+                HorizontalAlignment="Right"
+                Margin="0"
+                VerticalAlignment="Center"
+                Width="100"
+                Grid.Column="3"
+                Grid.Row="3"
+                Padding="3"
+                Click="StatBtn_Click"
+                IsEnabled="{Binding ElementName=ToolsListView, Path=SelectedItems.Count, Converter={StaticResource SelectedListCountToBool}}" />
+            <Button
+                Content="Edytuj"
+                HorizontalAlignment="Right"
+                Margin="0"
+                VerticalAlignment="Center"
+                Width="100"
+                Grid.Column="4"
+                Grid.Row="3"
+                Padding="3"
+                IsEnabled="{Binding ElementName=ToolsListView, Path=SelectedItems.Count, Converter={StaticResource SelectedListCountToBool}}"
+                Click="EditBtn_Click" />
+            <Button
+                Content="Zamknij"
+                HorizontalAlignment="Right"
+                Margin="0"
+                VerticalAlignment="Center"
+                Width="100"
+                Grid.Column="5"
+                Grid.Row="3"
+                Padding="3"
+                Click="CloseBtn_Click" />
+
+            <ListView
+                x:Name="ToolsListView"
+                Margin="0"
+                VerticalAlignment="Top"
+                SelectionMode="Single"
+                Grid.Column="0"
+                Grid.Row="1"
+                Grid.ColumnSpan="6"
+                Grid.RowSpan="2"
+                MouseDoubleClick="EditBtn_Click"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ItemsSource="{Binding Source={StaticResource ToolsListView}}">
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem
+                            Header="Edytuj"
+                            Click="EditBtn_Click" />
+                        <MenuItem
+                            Header="Usuń"
+                            Click="RemoveTool" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn
+                            Header="Nazwa"
+                            Width="auto"
+                            DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn
+                            Header="Producent"
+                            Width="auto"
+                            DisplayMemberBinding="{Binding Producer.CompanyName}" />
+                        <GridViewColumn
+                            Header="SN"
+                            Width="auto"
+                            DisplayMemberBinding="{Binding Sn}" />
+                        <GridViewColumn
+                            Header="Cena Wypożyczenia"
+                            Width="auto"
+                            DisplayMemberBinding="{Binding RentalPrice}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </DockPanel>
+</Window>
