@@ -44,6 +44,7 @@ namespace Rental.WPF.Helpers
         private readonly IList<Tool> _tools;
         private const string SettingsFileName = "settings.json";
         private const string reportDirectory = "ReportDirectory";
+        private const string AppDirectory = "Rental";
 
         private SettingsViewModel _settings = new SettingsViewModel();
         private readonly ITransactionRepository _db;
@@ -84,7 +85,7 @@ namespace Rental.WPF.Helpers
         private string CheckDirectory()
         {
             var currentDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            var path = Path.Combine(currentDirectory, reportDirectory);
+            var path = Path.Combine(currentDirectory, AppDirectory, reportDirectory);
 
             try
             {

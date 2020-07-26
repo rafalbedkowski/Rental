@@ -16,6 +16,7 @@ namespace Rental.WPF.Windows
     {
         private bool _isEdited = false;
         private const string SettingsFileName = "settings.json";
+        private const string AppDirectory = "Rental";
 
         public SettingsWindow()
         {
@@ -70,7 +71,7 @@ namespace Rental.WPF.Windows
 
         private void SaveToFile()
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), SettingsFileName);
+            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppDirectory, SettingsFileName);
             var logoUrl = LogoUrl.Source != null ? LogoUrl.Source.ToString() : "";
             var settings = new SettingsViewModel
             {
