@@ -15,18 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_11CC4FC947D170E00518456536FB037A"
-        "OwnerKey" = "8:_68BCF88C8D40CEA2E74BB203EFBEFD61"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_11CC4FC947D170E00518456536FB037A"
-        "OwnerKey" = "8:_B5917314E0974354A625B5EE777FC560"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1A17D2AE2AA080D78113398E9B057339"
         "OwnerKey" = "8:_B5917314E0974354A625B5EE777FC560"
         "MsmSig" = "8:_UNDEFINED"
@@ -35,6 +23,12 @@
         {
         "MsmKey" = "8:_1A17D2AE2AA080D78113398E9B057339"
         "OwnerKey" = "8:_EC35466871E46C3C4A61856DEF8752E0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_30C7ADDBC3584E079B60B1DFC7B3B4D9"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -51,6 +45,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_44BBB70A75EA837B090E3021A7FD7B04"
+        "OwnerKey" = "8:_9EF29D6650D75E50A1F929668FCB0707"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_44BBB70A75EA837B090E3021A7FD7B04"
+        "OwnerKey" = "8:_B5917314E0974354A625B5EE777FC560"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5DE62EA9E9C1C91329AA41D584E61130"
         "OwnerKey" = "8:_C56C40835D68B403426F5936FBB97C66"
         "MsmSig" = "8:_UNDEFINED"
@@ -58,18 +64,12 @@
         "Entry"
         {
         "MsmKey" = "8:_5DE62EA9E9C1C91329AA41D584E61130"
-        "OwnerKey" = "8:_B5917314E0974354A625B5EE777FC560"
+        "OwnerKey" = "8:_9EF29D6650D75E50A1F929668FCB0707"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_5DE62EA9E9C1C91329AA41D584E61130"
-        "OwnerKey" = "8:_68BCF88C8D40CEA2E74BB203EFBEFD61"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_68BCF88C8D40CEA2E74BB203EFBEFD61"
         "OwnerKey" = "8:_B5917314E0974354A625B5EE777FC560"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -107,12 +107,6 @@
         {
         "MsmKey" = "8:_86A2623A049E8E67FDC9996B01CBE3E3"
         "OwnerKey" = "8:_B5917314E0974354A625B5EE777FC560"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8B08A56F8D7B42B79626760AE8D30708"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -167,6 +161,12 @@
         {
         "MsmKey" = "8:_8E63509E578B3922BD163F1520906830"
         "OwnerKey" = "8:_CA36D2BF7782B2059856B0AF89044E63"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9EF29D6650D75E50A1F929668FCB0707"
+        "OwnerKey" = "8:_B5917314E0974354A625B5EE777FC560"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -393,6 +393,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_EB2C83B9A98639BC41605CEACA4701B3"
+        "OwnerKey" = "8:_435D32B9A93F2DAC9CC2E2098B776B9C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_EC35466871E46C3C4A61856DEF8752E0"
         "OwnerKey" = "8:_B5917314E0974354A625B5EE777FC560"
         "MsmSig" = "8:_UNDEFINED"
@@ -442,13 +448,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_68BCF88C8D40CEA2E74BB203EFBEFD61"
+        "OwnerKey" = "8:_9EF29D6650D75E50A1F929668FCB0707"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_11CC4FC947D170E00518456536FB037A"
+        "OwnerKey" = "8:_44BBB70A75EA837B090E3021A7FD7B04"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -670,37 +676,6 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_11CC4FC947D170E00518456536FB037A"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Rental.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_11CC4FC947D170E00518456536FB037A"
-                    {
-                    "Name" = "8:Rental.DAL.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Rental.DAL.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_D47F4B2C0E084869BBA4CE6C61002C45"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1A17D2AE2AA080D78113398E9B057339"
             {
             "AssemblyRegister" = "3:1"
@@ -730,6 +705,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_30C7ADDBC3584E079B60B1DFC7B3B4D9"
+            {
+            "SourcePath" = "8:D:\\Morezo\\Logo\\installerLogo.jpg"
+            "TargetName" = "8:installerLogo.jpg"
+            "Tag" = "8:"
+            "Folder" = "8:_D47F4B2C0E084869BBA4CE6C61002C45"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_372227A2CC8A9965692B1B662A4134CF"
@@ -794,20 +789,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5DE62EA9E9C1C91329AA41D584E61130"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_44BBB70A75EA837B090E3021A7FD7B04"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Rental.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5DE62EA9E9C1C91329AA41D584E61130"
+                    "_44BBB70A75EA837B090E3021A7FD7B04"
                     {
-                    "Name" = "8:EntityFramework.dll"
+                    "Name" = "8:Rental.DAL.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:EntityFramework.dll"
+            "SourcePath" = "8:Rental.DAL.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_D47F4B2C0E084869BBA4CE6C61002C45"
@@ -825,20 +820,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_68BCF88C8D40CEA2E74BB203EFBEFD61"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5DE62EA9E9C1C91329AA41D584E61130"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Rental.BLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_68BCF88C8D40CEA2E74BB203EFBEFD61"
+                    "_5DE62EA9E9C1C91329AA41D584E61130"
                     {
-                    "Name" = "8:Rental.BLL.dll"
+                    "Name" = "8:EntityFramework.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Rental.BLL.dll"
+            "SourcePath" = "8:EntityFramework.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_D47F4B2C0E084869BBA4CE6C61002C45"
@@ -918,26 +913,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8B08A56F8D7B42B79626760AE8D30708"
-            {
-            "SourcePath" = "8:D:\\Morezo\\Logo\\logo.jpg"
-            "TargetName" = "8:logo.jpg"
-            "Tag" = "8:"
-            "Folder" = "8:_D47F4B2C0E084869BBA4CE6C61002C45"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8E63509E578B3922BD163F1520906830"
             {
             "AssemblyRegister" = "3:1"
@@ -952,6 +927,37 @@
                     }
                 }
             "SourcePath" = "8:Common.Logging.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_D47F4B2C0E084869BBA4CE6C61002C45"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9EF29D6650D75E50A1F929668FCB0707"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Rental.BLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_9EF29D6650D75E50A1F929668FCB0707"
+                    {
+                    "Name" = "8:Rental.BLL.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Rental.BLL.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_D47F4B2C0E084869BBA4CE6C61002C45"
@@ -1449,7 +1455,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:RentalSetup"
         "ProductCode" = "8:{CB72F8ED-F012-4B33-8EE0-87FC94B55964}"
-        "PackageCode" = "8:{F9D79304-6325-43FA-AE81-C31B821D35CF}"
+        "PackageCode" = "8:{8121104A-D5D2-4158-8377-34E15E07BD2C}"
         "UpgradeCode" = "8:{298F9370-D777-4187-A7BB-E8F98AEDEC4E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1625,7 +1631,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_8B08A56F8D7B42B79626760AE8D30708"
+                            "Value" = "8:_30C7ADDBC3584E079B60B1DFC7B3B4D9"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
@@ -1670,7 +1676,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_8B08A56F8D7B42B79626760AE8D30708"
+                            "Value" = "8:_30C7ADDBC3584E079B60B1DFC7B3B4D9"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
@@ -1715,7 +1721,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_8B08A56F8D7B42B79626760AE8D30708"
+                            "Value" = "8:_30C7ADDBC3584E079B60B1DFC7B3B4D9"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1747,7 +1753,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_8B08A56F8D7B42B79626760AE8D30708"
+                            "Value" = "8:_30C7ADDBC3584E079B60B1DFC7B3B4D9"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -1796,7 +1802,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_8B08A56F8D7B42B79626760AE8D30708"
+                            "Value" = "8:_30C7ADDBC3584E079B60B1DFC7B3B4D9"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1819,7 +1825,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_8B08A56F8D7B42B79626760AE8D30708"
+                            "Value" = "8:_30C7ADDBC3584E079B60B1DFC7B3B4D9"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1851,7 +1857,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_8B08A56F8D7B42B79626760AE8D30708"
+                            "Value" = "8:_30C7ADDBC3584E079B60B1DFC7B3B4D9"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "UpdateText"
@@ -1908,7 +1914,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_8B08A56F8D7B42B79626760AE8D30708"
+                            "Value" = "8:_30C7ADDBC3584E079B60B1DFC7B3B4D9"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -1957,7 +1963,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_8B08A56F8D7B42B79626760AE8D30708"
+                            "Value" = "8:_30C7ADDBC3584E079B60B1DFC7B3B4D9"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1980,7 +1986,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_8B08A56F8D7B42B79626760AE8D30708"
+                            "Value" = "8:_30C7ADDBC3584E079B60B1DFC7B3B4D9"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "InstallAllUsersVisible"
@@ -2008,7 +2014,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B5917314E0974354A625B5EE777FC560"
             {
-            "SourcePath" = "8:..\\Rental.WPF\\obj\\Debug\\Rental.exe"
+            "SourcePath" = "8:..\\Rental.WPF\\obj\\Release\\Rental.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_D47F4B2C0E084869BBA4CE6C61002C45"

@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rental.WPF", "Rental.WPF\Rental.WPF.csproj", "{5FE4EA59-6E92-4E2A-82A1-9D46507FD4DA}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "RentalSetup", "RentalSetup\RentalSetup.vdproj", "{C6F7D04A-5475-407D-B3C6-AF16B119FB89}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2C7E3F18-2400-4C3D-A215-66B491E92D1B} = {2C7E3F18-2400-4C3D-A215-66B491E92D1B}
+		{A30194D1-52FD-4244-8346-D07A148BEEAC} = {A30194D1-52FD-4244-8346-D07A148BEEAC}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

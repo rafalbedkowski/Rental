@@ -12,24 +12,32 @@
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen">
     <StackPanel
-        Margin="10"
-        VerticalAlignment="Center">
-        <TextBlock
-            VerticalAlignment="Top"
-            Width="198"
-            TextAlignment="Center"><Run
-                Text="Wypożyczalnia narzędzi" /><LineBreak /><Run /><LineBreak /><Run
-                Text="Rafał Będkowski" /><LineBreak /><Run /><LineBreak />
+        Orientation="Horizontal">
+        <Image
+            Source="../logo.gif"
+            Height="50"
+            VerticalAlignment="Center"
+            Margin="20,0,0,20" />
+        <StackPanel
+            Margin="10"
+            VerticalAlignment="Center">
+            <TextBlock
+                VerticalAlignment="Top"
+                Width="198"
+                TextAlignment="Center"><Run
+                    Text="Wypożyczalnia narzędzi" /><LineBreak /><Run /><LineBreak /><Run
+                    Text="Rafał Będkowski" /><LineBreak /><Run /><LineBreak />
         <Hyperlink
-                NavigateUri="http://www.morezo.pl"
-                RequestNavigate="Hyperlink_RequestNavigate">www.morezo.pl</Hyperlink>
-        </TextBlock>
-        <Button
-            Content="Zamknij"
-            HorizontalAlignment="Center"
-            Width="75"
-            Click="CloseBtn_Click"
-            Margin="0,20,0,0" />
+                    NavigateUri="http://www.morezo.pl"
+                    RequestNavigate="Hyperlink_RequestNavigate">www.morezo.pl</Hyperlink>
+            </TextBlock>
+            <Button
+                Content="Zamknij"
+                HorizontalAlignment="Center"
+                Width="75"
+                Click="CloseBtn_Click"
+                Margin="0,20,0,0" />
 
+        </StackPanel>
     </StackPanel>
 </Window>
