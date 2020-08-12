@@ -12,7 +12,7 @@
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Bll.DalContext.RentalContext context)
+        protected override void Seed(Rental.Bll.DalContext.RentalContext context)
         {
             //  This method will be called after migrating to the latest version.
 

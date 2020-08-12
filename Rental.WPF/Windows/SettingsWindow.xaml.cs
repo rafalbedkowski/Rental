@@ -95,14 +95,15 @@ namespace Rental.WPF.Windows
             }
             catch (Exception e)
             {
-                MessageBox.Show("Błąd zapisu do pliku konfiguracyjnego !" + "Erro : " + e.Message, "Uwaga !", MessageBoxButton.OK,
+                MessageBox.Show("Błąd zapisu do pliku konfiguracyjnego !" + "Error : " + e.Message, "Uwaga !", MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
         }
 
         private void ReadFromFile()
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), SettingsFileName);
+            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                AppDirectory, SettingsFileName);
             var fileExist = File.Exists(filePath);
 
             if (!fileExist) return;

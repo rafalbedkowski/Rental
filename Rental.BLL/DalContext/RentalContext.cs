@@ -1,10 +1,22 @@
 using System;
+using System.Collections.Generic;
+using System.Data;
 using Rental.DAL.Models;
 using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data.Sql;
+using System.IO;
+using System.Linq;
 using System.Net.Http;
+using System.Net.Mime;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
+using Microsoft.SqlServer.Management.Smo;
+using Microsoft.Win32;
 using Rental.BLL.IDalContext;
-using Rental.BLL.Migrations;
+using User = Rental.DAL.Models.User;
 
 
 namespace Rental.Bll.DalContext
@@ -18,18 +30,8 @@ namespace Rental.Bll.DalContext
             _db = db;
         }
 
-        public RentalContext()
-            : base(nameOrConnectionString: "RentalContext")
+        public RentalContext() : base("Name=RentalContext")
         {
-            try
-            {
-                this.Database.Connection.Open();
-                this.Database.Connection.Close();
-            }
-            catch
-            {
-                Database.SetInitializer<RentalContext>(new DropCreateDatabaseAlways<RentalContext>());
-            }
         }
 
         public DbSet<User> Users { get; set; }

@@ -3,10 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml.Linq;
+using Microsoft.Win32;
 using Rental.BLL.IRepository;
 using Rental.DAL.Models;
 using Rental.WPF.Windows;
@@ -17,7 +21,6 @@ namespace Rental.WPF
     public partial class MainWindow : Window
     {
         private readonly ITransactionRepository _db;
-        //private readonly ObservableCollection<Transaction> _transaction;
         private readonly ICollection<Transaction> _transaction;
 
         public IUnityContainer Container { get; set; }
@@ -27,10 +30,9 @@ namespace Rental.WPF
         {
             Container = container;
             _db = db;
+
             InitializeComponent();
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
-            var test = _db.GetAll();
-            //_transaction = new ObservableCollection<Transaction>(_db.GetAll());
             _transaction = _db.GetAll();
         }
 

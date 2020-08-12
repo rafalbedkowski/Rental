@@ -57,6 +57,5 @@ namespace Rental.WPF
             container.RegisterType<TransactionWindow>(new InjectionConstructor(container, new TransactionRepository(context)));
             container.RegisterType<StatisticWindow>(new InjectionConstructor(container, new TransactionRepository(context)));
         }
-
     }
 }
