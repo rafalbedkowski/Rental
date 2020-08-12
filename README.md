@@ -11,6 +11,9 @@ https://github.com/rafalbedkowski/Rental.git
 ```
 
 ### Prerequisites
+```
+Install SQLExpress
+```
 
 Open Rental.sln in Visual Studio
 
