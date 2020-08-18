@@ -71,7 +71,8 @@ namespace Rental.WPF.Windows
 
         private void SaveToFile()
         {
-            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppDirectory, SettingsFileName);
+            var dirSettings = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppDirectory);
+            var filePath = Path.Combine(dirSettings, SettingsFileName);
             var logoUrl = LogoUrl.Source != null ? LogoUrl.Source.ToString() : "";
             var settings = new SettingsViewModel
             {
@@ -87,6 +88,7 @@ namespace Rental.WPF.Windows
 
             try
             {
+                if (!Directory.Exists(dirSettings)) Directory.CreateDirectory(dirSettings);
                 using (var sw = File.CreateText(filePath))
                 {
                     var serializer = new JsonSerializer();
