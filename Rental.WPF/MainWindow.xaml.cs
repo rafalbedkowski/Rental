@@ -33,7 +33,15 @@ namespace Rental.WPF
 
             InitializeComponent();
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
-            _transaction = _db.GetAll();
+            try
+            {
+                _transaction = _db.GetAll();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Błąd dostępu do bazy danych:  {e.Message}", "Błąd", MessageBoxButton.OK);
+            }
+
         }
 
         #region Initialize
