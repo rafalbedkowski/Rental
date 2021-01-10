@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -77,7 +81,20 @@ namespace Rental.WPF.Windows
             };
 
             _db.AddUser(user);
-            _db.SaveChanges();
+
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                DbExceptionValidate("Błąd dodania użytkownika", e);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Błąd dodania użytkownika : " + e.Message, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             SetEdited(false);
             this.Close();
         }
@@ -86,9 +103,62 @@ namespace Rental.WPF.Windows
         {
             var user = (User)this.DataContext;
             _db.UpdateUser(user);
-            _db.SaveChanges();
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                DbExceptionValidate("Błąd aktualizacji użytkownika", e);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Błąd aktualizacji użytkownika : " + e.Message, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             SetEdited(false);
             this.Close();
+        }
+
+        private void DbExceptionValidate(string title, DbEntityValidationException e)
+        {
+            var outputLines = new List<string>();
+            var i = 0;
+            var message = "";
+
+            foreach (var eve in e.EntityValidationErrors)
+            {
+                outputLines.AddRange(eve.ValidationErrors.Select(ve =>
+                    $"{++i}- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\""));
+                switch (eve.Entry.State)
+                {
+                    case EntityState.Added:
+                        eve.Entry.State = EntityState.Detached;
+                        break;
+                    case EntityState.Modified:
+                        eve.Entry.CurrentValues.SetValues(eve.Entry.OriginalValues);
+                        eve.Entry.State = EntityState.Unchanged;
+                        break;
+                    case EntityState.Deleted:
+                        eve.Entry.State = EntityState.Unchanged;
+                        break;
+                    case EntityState.Detached:
+                        break;
+                    case EntityState.Unchanged:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+
+            if (outputLines.Any())
+            {
+                foreach (var outputLine in outputLines)
+                {
+                    message += $"\n{outputLine}";
+                }
+            }
+
+            MessageBox.Show($"{title} : " + message, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         #endregion

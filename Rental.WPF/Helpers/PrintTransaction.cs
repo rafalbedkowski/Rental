@@ -1,37 +1,23 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Printing;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using iText.IO.Font;
-using iText.IO.Font.Constants;
-using iText.IO.Image;
+﻿using iText.IO.Image;
 using iText.Kernel.Colors;
 using iText.Kernel.Events;
 using iText.Kernel.Font;
 using iText.Kernel.Pdf;
-using iText.Kernel.Pdf.Canvas.Draw;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
-using Microsoft.Win32;
 using Newtonsoft.Json;
 using Rental.BLL.IRepository;
 using Rental.DAL.Models;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Windows;
 using Border = iText.Layout.Borders.Border;
 using DateTime = System.DateTime;
 using HorizontalAlignment = iText.Layout.Properties.HorizontalAlignment;
 using Image = iText.Layout.Element.Image;
-using IOException = iText.IO.IOException;
 using TextAlignment = iText.Layout.Properties.TextAlignment;
 using Transaction = Rental.DAL.Models.Transaction;
 using VerticalAlignment = iText.Layout.Properties.VerticalAlignment;
@@ -43,7 +29,7 @@ namespace Rental.WPF.Helpers
         private readonly Transaction _transaction;
         private readonly IList<Tool> _tools;
         private const string SettingsFileName = "settings.json";
-        private const string reportDirectory = "ReportDirectory";
+        private const string ReportDirectory = "ReportDirectory";
         private const string AppDirectory = "Rental";
 
         private SettingsViewModel _settings = new SettingsViewModel();
@@ -76,7 +62,16 @@ namespace Rental.WPF.Helpers
             {
                 MessageBox.Show("Błąd tworzenia pliku PDF : " + e.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            PrintFile(filePath);
+
+            try
+            {
+                PrintFile(filePath);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Błąd wydruku : " + e.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             return true;
         }
 
@@ -84,26 +79,39 @@ namespace Rental.WPF.Helpers
 
         private string CheckDirectory()
         {
-            var currentDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            var path = Path.Combine(currentDirectory, AppDirectory, reportDirectory);
+            var currentDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            var appDirectory = Path.Combine(currentDirectory, AppDirectory);
+            var pathReport = Path.Combine(currentDirectory, AppDirectory, ReportDirectory);
 
             try
             {
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
+                if (!Directory.Exists(appDirectory))
+                    Directory.CreateDirectory(appDirectory);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Błąd katalogu aplikacji RENTAL : " + e.Message, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            try
+            {
+                if (!Directory.Exists(pathReport))
+                    Directory.CreateDirectory(pathReport);
             }
             catch (Exception e)
             {
                 MessageBox.Show("Błąd katalogu wydruków : " + e.Message, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            return path;
+            return pathReport;
         }
 
         private void ReadSettings()
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), SettingsFileName);
+            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), SettingsFileName);
             var fileExist = File.Exists(filePath);
+
+            MessageBox.Show(filePath, "UWAGA", MessageBoxButton.OK);
 
             if (!fileExist) return;
             using (var file = File.OpenText(filePath))
@@ -117,12 +125,14 @@ namespace Rental.WPF.Helpers
 
         private void PrintFile(string Filepath)
         {
-            Process p = new Process();
-            p.StartInfo = new ProcessStartInfo()
+            var p = new Process
             {
-                CreateNoWindow = true,
-                Verb = "print",
-                FileName = Filepath //put the correct path here
+                StartInfo = new ProcessStartInfo()
+                {
+                    CreateNoWindow = true,
+                    Verb = "print",
+                    FileName = Filepath //put the correct path here
+                }
             };
             p.Start();
         }

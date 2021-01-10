@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -98,10 +101,10 @@ namespace Rental.WPF
                 DocumentNumber = TextBoxDocumentNumber.Text,
                 Warranty = warranty,
                 RentalPrice = rentalPrice,
-                Destroyed = (bool)Destroyed.IsChecked,
+                Destroyed = Destroyed.IsChecked != null && (bool)Destroyed.IsChecked,
                 DestroyedDate = DestroyedDate.SelectedDate?.Date.Add(DateTime.Now.TimeOfDay),
                 DestroyedCustomer = (User)SelectDestroyed.SelectedItem,
-                Lost = (bool)Lost.IsChecked,
+                Lost = Lost.IsChecked != null && (bool)Lost.IsChecked,
                 LostDate = DestroyedDate.SelectedDate?.Date.Add(DateTime.Now.TimeOfDay),
                 LostCustomer = (User)SelectLost.SelectedItem,
                 Description = new TextRange(TextBoxDescription.Document.ContentStart, TextBoxDescription.Document.ContentEnd).Text,
@@ -112,6 +115,10 @@ namespace Rental.WPF
             try
             {
                 _db.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                DbExceptionValidate("Błąd zapisu narzędzi", e);
             }
             catch (Exception e)
             {
@@ -129,12 +136,59 @@ namespace Rental.WPF
             {
                 _db.SaveChanges();
             }
+            catch (DbEntityValidationException e)
+            {
+                DbExceptionValidate("Błąd aktualizacji narzędzi", e);
+            }
             catch (Exception e)
             {
                 MessageBox.Show("Błąd aktualizacji narzędzi : " + e.Message, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             SetEdited(false);
             this.Close();
+        }
+
+        private void DbExceptionValidate(string title, DbEntityValidationException e)
+        {
+            var outputLines = new List<string>();
+            var i = 0;
+            var message = "";
+
+            foreach (var eve in e.EntityValidationErrors)
+            {
+                outputLines.AddRange(eve.ValidationErrors.Select(ve =>
+                    $"{++i}- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\""));
+
+                switch (eve.Entry.State)
+                {
+                    case EntityState.Added:
+                        eve.Entry.State = EntityState.Detached;
+                        break;
+                    case EntityState.Modified:
+                        eve.Entry.CurrentValues.SetValues(eve.Entry.OriginalValues);
+                        eve.Entry.State = EntityState.Unchanged;
+                        break;
+                    case EntityState.Deleted:
+                        eve.Entry.State = EntityState.Unchanged;
+                        break;
+                    case EntityState.Detached:
+                        break;
+                    case EntityState.Unchanged:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+
+            if (outputLines.Any())
+            {
+                foreach (var outputLine in outputLines)
+                {
+                    message += $"\n{outputLine}";
+                }
+            }
+
+            MessageBox.Show($"{title} : " + message, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         #endregion

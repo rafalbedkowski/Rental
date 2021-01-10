@@ -71,7 +71,7 @@ namespace Rental.WPF.Windows
 
         private void SaveToFile()
         {
-            var dirSettings = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppDirectory);
+            var dirSettings = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), AppDirectory);
             var filePath = Path.Combine(dirSettings, SettingsFileName);
             var logoUrl = LogoUrl.Source != null ? LogoUrl.Source.ToString() : "";
             var settings = new SettingsViewModel
@@ -104,7 +104,7 @@ namespace Rental.WPF.Windows
 
         private void ReadFromFile()
         {
-            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 AppDirectory, SettingsFileName);
             var fileExist = File.Exists(filePath);
 
