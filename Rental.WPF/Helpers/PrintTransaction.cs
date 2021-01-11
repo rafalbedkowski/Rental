@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using iText.Kernel.Pdf.Xobject;
+using Rental.WPF.Windows;
 using Border = iText.Layout.Borders.Border;
 using DateTime = System.DateTime;
 using HorizontalAlignment = iText.Layout.Properties.HorizontalAlignment;
@@ -108,12 +110,14 @@ namespace Rental.WPF.Helpers
 
         private void ReadSettings()
         {
-            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), SettingsFileName);
+            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), AppDirectory, SettingsFileName);
             var fileExist = File.Exists(filePath);
 
-            MessageBox.Show(filePath, "UWAGA", MessageBoxButton.OK);
-
-            if (!fileExist) return;
+            if (!fileExist)
+            {
+                MessageBox.Show("Przejdź do ustawień i uzupełnij dane.", "Uwaga", MessageBoxButton.OK);
+                return;
+            }
             using (var file = File.OpenText(filePath))
             {
                 var serializer = new JsonSerializer();
@@ -154,6 +158,7 @@ namespace Rental.WPF.Helpers
                 .Add(logo)
                 .SetVerticalAlignment(VerticalAlignment.MIDDLE)
                 .SetBorder(Border.NO_BORDER);
+
             Cell transactionData = new Cell()
                 .Add(new Paragraph("Data wystawienie : " + DateTime.Now).SetTextAlignment(TextAlignment.RIGHT).SetFontSize(10))
                 .Add(new Paragraph("Data transakcji : " + _transaction.TransactionDate).SetTextAlignment(TextAlignment.RIGHT).SetFontSize(10))
@@ -198,21 +203,21 @@ namespace Rental.WPF.Helpers
                 .SetTextAlignment(TextAlignment.LEFT)
                 .SetPaddingLeft(5)
                 .SetBorderRadius(new BorderRadius(4))
-                .Add(new Paragraph(_settings.CompanyName))
-                .Add(new Paragraph(_settings.PostalCode + " " + _settings.City))
-                .Add(new Paragraph(_settings.Address))
-                .Add(new Paragraph("Email : " + _settings.Email))
-                .Add(new Paragraph("Telefon : " + _settings.Phone));
+                .Add(new Paragraph(_settings.CompanyName ?? ""))
+                .Add(new Paragraph(_settings.PostalCode ?? "" + " " + _settings.City ?? ""))
+                .Add(new Paragraph(_settings.Address ?? ""))
+                .Add(new Paragraph("Email : " + _settings.Email ?? ""))
+                .Add(new Paragraph("Telefon : " + _settings.Phone ?? ""));
 
             Cell CustomerData = new Cell()
                 .SetTextAlignment(TextAlignment.LEFT)
                 .SetPaddingLeft(5)
                 .SetBorderRadius(new BorderRadius(4))
-                .Add(new Paragraph(_transaction.Customer.Company.CompanyName))
-                .Add(new Paragraph(_transaction.Customer.FullName))
-                .Add(new Paragraph(_transaction.Customer.Company.PostCode + " " + _transaction.Customer.Company.City))
-                .Add(new Paragraph("Email : " + _transaction.Customer.Company.Address))
-                .Add(new Paragraph("Telefon : " + _transaction.Customer.Phone));
+                .Add(new Paragraph(_transaction.Customer.Company?.CompanyName ?? ""))
+                .Add(new Paragraph(_transaction.Customer.FullName ?? ""))
+                .Add(new Paragraph(_transaction.Customer.Company?.PostCode ?? "" + " " + _transaction.Customer.Company?.City ?? ""))
+                .Add(new Paragraph("Email : " + _transaction.Customer.Company?.Address ?? ""))
+                .Add(new Paragraph("Telefon : " + _transaction.Customer.Phone ?? ""));
 
             Paragraph transactionNumber = new Paragraph(_transaction.TransactionType == TransactionType.Rent ? "Wypozyczenie nr : " + _transaction.TransactionNumber.ToString() : "Zwrot nr : " + _transaction.TransactionNumber.ToString());
             transactionNumber
@@ -246,12 +251,12 @@ namespace Rental.WPF.Helpers
             for (int i = 0; i < _tools.Count; i++)
             {
                 transactionToolsTable.AddCell((i + 1) + ".");
-                transactionToolsTable.AddCell(_tools[i].Name);
+                transactionToolsTable.AddCell(_tools[i].Name ?? "");
                 if (_tools[i].Producer != null)
-                    transactionToolsTable.AddCell(_tools[i].Producer.CompanyName);
+                    transactionToolsTable.AddCell(_tools[i].Producer.CompanyName ?? "");
                 else
                     transactionToolsTable.AddCell(new Paragraph(""));
-                transactionToolsTable.AddCell(_tools[i].Sn);
+                transactionToolsTable.AddCell(_tools[i].Sn ?? "");
                 transactionToolsTable.AddCell(_tools[i].RentalPrice + " zł");
             }
 
@@ -270,7 +275,8 @@ namespace Rental.WPF.Helpers
                 foreach (var tool in _tools)
                 {
                     var price = _db.GetPriceForRent(tool.ToolId, _transaction.TransactionDate);
-                    cell.Add(new Paragraph(tool.Name + " dni: " + (price / tool.RentalPrice) + " x cena: " + _transaction.PriceForRent + " = wartość: " + price + " zł").SetBorder(Border.NO_BORDER))
+                    var amount = (price == 0 || tool.RentalPrice == 0) ? 0 : price / tool.RentalPrice;
+                    cell.Add(new Paragraph(tool.Name + " dni: " + amount + " x cena: " + _transaction.PriceForRent + " = wartość: " + price + " zł").SetBorder(Border.NO_BORDER))
                         .SetTextAlignment(TextAlignment.RIGHT)
                         .SetBorder(Border.NO_BORDER)
                         .SetFontSize(10);
@@ -307,7 +313,7 @@ namespace Rental.WPF.Helpers
             signatureTable.SetBorder(Border.NO_BORDER);
 
             Cell User = new Cell()
-                .Add(new Paragraph(_transaction.AppUser.FullName))
+                .Add(new Paragraph(_transaction.AppUser.FullName ?? ""))
                 .Add(new Paragraph("............................................................"))
                 .Add(new Paragraph("data i podpis wydającego"))
                 .SetTextAlignment(TextAlignment.CENTER)
@@ -315,7 +321,7 @@ namespace Rental.WPF.Helpers
                 .SetBorder(Border.NO_BORDER);
 
             Cell Customer = new Cell()
-                .Add(new Paragraph(_transaction.Customer.FullName))
+                .Add(new Paragraph(_transaction.Customer.FullName ?? ""))
                 .Add(new Paragraph("............................................................"))
                 .Add(new Paragraph("data i podpis wypożyczającego"))
                 .SetTextAlignment(TextAlignment.CENTER)

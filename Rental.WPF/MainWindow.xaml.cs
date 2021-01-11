@@ -118,13 +118,13 @@ namespace Rental.WPF
         {
             var transaction = (Transaction)Transaction.SelectedItem;
             if (transaction == null) return;
-            var transactionWidow = Container.Resolve<TransactionWindow>();
-            transactionWidow.DataContext = transaction;
-            transactionWidow.SetEditedMode(true);
-            transactionWidow.ToolsListView.ItemsSource =
+            var transactionWindow = Container.Resolve<TransactionWindow>();
+            transactionWindow.DataContext = transaction;
+            transactionWindow.SetEditedMode(true);
+            transactionWindow.ToolsListView.ItemsSource =
                 _db.GetToolByTransactionNumber(((Transaction)Transaction.SelectedItem).TransactionNumber);
-            transactionWidow.TransactionType = ((Transaction)Transaction.SelectedItem).TransactionType;
-            transactionWidow.ShowDialog();
+            transactionWindow.TransactionType = ((Transaction)Transaction.SelectedItem).TransactionType;
+            transactionWindow.ShowDialog();
             LoadDataToCheckBtn();
         }
 
